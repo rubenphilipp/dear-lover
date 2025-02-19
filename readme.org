@@ -1,0 +1,33 @@
+# -*- eval: (flyspell-mode); eval: (ispell-change-dictionary "en") -*-
+#+CATEGORY: gp
+#+title: dear lover
+#+author: Ruben Philipp
+#+date: 2025-02-19
+#+LANGUAGE: en
+#+startup: overview
+
+#+begin_comment
+$$ Last modified:  21:20:58 Wed Feb 19 2025 CET
+#+end_comment
+
+Ongoing project of Greta Gottschalk and Ruben Philipp.
+
+* Description
+
+This directory contains the code for the website.
+
+
+* Development
+
+In order to set up a development environment, perform the following
+command:[fn:1]
+
+#+begin_src shell
+ddev config --webserver-type=apache-fpm --database=mariadb:11.4 --docroot src
+# then start the server
+ddev start # or restart
+#+end_src
+
+* Footnotes
+
+[fn:1] This requires DDEV (https://ddev.com) to be installed.  
