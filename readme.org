@@ -7,7 +7,7 @@
 #+startup: overview
 
 #+begin_comment
-$$ Last modified:  21:20:58 Wed Feb 19 2025 CET
+$$ Last modified:  22:11:35 Wed Feb 19 2025 CET
 #+end_comment
 
 Ongoing project of Greta Gottschalk and Ruben Philipp.
@@ -23,7 +23,7 @@ In order to set up a development environment, perform the following
 command:[fn:1]
 
 #+begin_src shell
-ddev config --webserver-type=apache-fpm --database=mariadb:11.4 --docroot src
+ddev config --webserver-type=apache-fpm --database=mariadb:11.4 --docroot src --webimage-extra-packages="php\${DDEV_PHP_VERSION}-yaml"
 # then start the server
 ddev start # or restart
 #+end_src
