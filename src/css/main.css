@@ -3,7 +3,7 @@
    Main CSS for dear lover.
    created: 2025-02-20
 
-   $$ Last modified:  21:59:59 Thu Feb 20 2025 CET
+   $$ Last modified:  22:28:15 Thu Feb 20 2025 CET
 
 ***************************************************************************** */
 
@@ -12,7 +12,8 @@
 :root {
     --background-color: rgb(250,245,245);
     --text-color: rgb(0,0,0);
-    --default-font-family: "Helvetica Neue", Arial, sans-serif;
+    /* --default-font-family: "Helvetica Neue", Arial, sans-serif; */
+    --default-font-family: "Menlo", Courier, monospace;
     --default-font-size: 10pt;
     --default-font-size-headings: 12pt;
     --main-width: 600px;
@@ -40,12 +41,22 @@ header {
 }
 
 main {
+    margin-top: 30px;
     color: var(--text-color);
 }
 
+footer {
+    width: 100%;
+    margin-top: 50px;
+    text-align: right; 
+}
+
 h1, h2, h3, h4, h5, main, header, nav, p, a {
-    
-    margin: 0;
+    margin-top: 3px;
+}
+
+h1 > a {
+    text-decoration: none;
 }
 
 h1, h2, h3, h4, h5 {
@@ -54,7 +65,7 @@ h1, h2, h3, h4, h5 {
 }
 
 p, a {
-    font-size: var(--default-font-size);
+    /* font-size: var(--default-font-size); */
     color: var(--text-color);
 }
 

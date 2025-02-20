@@ -160,7 +160,7 @@
         <div class="main">
             
             <header>
-                <h1>dear lover</h1>
+                <h1><a href="index.php">dear lover</a></h1>
             </header>
             
             <main>
@@ -181,6 +181,10 @@
                 ?>
                 
             </main>
+
+            <footer>
+                <a href="imprint.php">imprint</a>
+            </footer>
 
         </div>
         
