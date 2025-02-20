@@ -138,7 +138,7 @@
 
             // random gray
             $rndGray = rand(50,200);
-            echo '<video class="lazy" controls data-poster="'.($data["poster"] ? MEDIA_DIR . $data["poster"] : "").'">';
+            echo '<video class="lazy" controls data-poster="'.($data["poster"] ? MEDIA_DIR . $data["poster"] : generateBase64ColorImage($rndGray,$rndGray,$rndGray)).'">';
             echo "\n";
             echo '<data-src src="' . MEDIA_DIR . $data["file"] . '" type="video/mp4"></data-src>';
             echo "\n";
