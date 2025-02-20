@@ -138,13 +138,17 @@
 
             // random gray
             $rndGray = rand(50,200);
-            echo '<video class="lazy" controls data-poster="'.generateBase64ColorImage($rndGray,$rndGray,$rndGray).'">';
-            //data-poster="'.($data["poster"] ? MEDIA_DIR . $data["poster"] : "").'">';
+            echo '<video class="lazy" controls data-poster="'.($data["poster"] ? MEDIA_DIR . $data["poster"] : "").'">';
             echo "\n";
             echo '<data-src src="' . MEDIA_DIR . $data["file"] . '" type="video/mp4"></data-src>';
             echo "\n";
             echo "</video>\n";
-            echo '<p>' . $data["date"] . "</p>" . "";
+            echo "<p style=\"text-align:right;\">\n";
+            echo "an " . $data["to"] . "&emsp;\n";
+            echo "von " . $data["from"] . "&emsp;\n";
+            echo $data["date"] . "\n";
+            
+            //echo '<p>an:' . $data["to"] . '_' . $data["date"] . '</p>';
 
             //echo $data["comment"] ? nl2br($data["comment"]) : "";
             

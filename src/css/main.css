@@ -3,14 +3,14 @@
    Main CSS for dear lover.
    created: 2025-02-20
 
-   $$ Last modified:  20:56:10 Thu Feb 20 2025 CET
+   $$ Last modified:  21:59:59 Thu Feb 20 2025 CET
 
 ***************************************************************************** */
 
 /* VARIABLES */
 
 :root {
-    --background-color: rgb(255,255,255);
+    --background-color: rgb(250,245,245);
     --text-color: rgb(0,0,0);
     --default-font-family: "Helvetica Neue", Arial, sans-serif;
     --default-font-size: 10pt;
