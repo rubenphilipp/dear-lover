@@ -100,12 +100,27 @@
         });
 
         ////////////////////////////////////////
+        // LETTER functions (output):
+        ////////////////////////////////////////
 
+        function doLetter($data) {
+            echo '<div class="letter">';
+
+            echo '<video controls style="width:100%;" type="video/mp4" poster="'.$data["still"].'" src="' . MEDIA_DIR . $data["file"] . '">\n';
+            echo MEDIA_DIR . $data["file"];
+            echo "</video>";
+            
+            echo "</div>\n";
+            
+        }
+        
         foreach($letters as $letter) {
-            echo $letter["file"];
-            echo "<br>";
-            echo $letter["date"] . " " . $letter["timestamp"];
-            echo "<br>";
+            /* echo $letter["file"];
+             * echo "<br>";
+             * echo $letter["date"] . " " . $letter["timestamp"];
+             * echo "<br>"; */
+
+            doLetter($letter);
         }
         
         ?>
