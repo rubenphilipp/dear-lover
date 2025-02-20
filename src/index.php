@@ -160,7 +160,7 @@
         <div class="main">
             
             <header>
-                <h1><a href="index.php">dear lover</a></h1>
+                <h1><a style="cursor: e-resize;" href="manifesto.php">dear lover</a></h1>
             </header>
             
             <main>

@@ -3,7 +3,7 @@
    Main CSS for dear lover.
    created: 2025-02-20
 
-   $$ Last modified:  22:28:15 Thu Feb 20 2025 CET
+   $$ Last modified:  22:34:04 Thu Feb 20 2025 CET
 
 ***************************************************************************** */
 
@@ -59,6 +59,10 @@ h1 > a {
     text-decoration: none;
 }
 
+h1 > a:hover {
+    text-decoration: underline;
+}
+
 h1, h2, h3, h4, h5 {
     font-weight: 600;
     font-size: var(--default-font-size-headings);
@@ -88,6 +92,11 @@ main .letter {
     object-fit: cover;
 }
 
+
+main.manifesto > p {
+    margin-top: 48px;
+    line-height: 1.66;
+}
 
 /* ************************************************************************** */
 /* EOF main.css */
