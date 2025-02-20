@@ -3,7 +3,7 @@
    Main CSS for dear lover.
    created: 2025-02-20
 
-   $$ Last modified:  22:34:04 Thu Feb 20 2025 CET
+   $$ Last modified:  22:59:24 Thu Feb 20 2025 CET
 
 ***************************************************************************** */
 
@@ -31,6 +31,8 @@ body {
 }
 
 header {
+    padding-top: 5px;
+    padding-bottom: 10px;
     min-height: 30px;
 }
 
