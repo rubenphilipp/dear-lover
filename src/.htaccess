@@ -1,0 +1,19 @@
+<IfModule mod_rewrite.c>
+
+RewriteEngine On
+
+# It might be necessary to set the RewriteBase:
+RewriteBase / 
+
+RewriteCond %{REQUEST_FILENAME} !-d 
+RewriteCond %{REQUEST_FILENAME}.php -f 
+RewriteRule ^(.*)$ $1.php [NC,L]
+
+RewriteRule ^$ index.php [L]
+
+# Error Page 
+RewriteCond %{REQUEST_FILENAME} !-f  
+RewriteCond %{REQUEST_FILENAME} !-d 
+RewriteRule .* error.php [L] 
+
+</IfModule> 
