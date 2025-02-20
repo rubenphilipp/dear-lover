@@ -31,6 +31,25 @@
         ////////////////////////////////////////
         // FUNCTIONS
 
+
+        // Generate a base64 color-string (e.g. for the video-posters).
+        function generateBase64ColorImage($r, $g, $b, $width = 1, $height = 1) {
+            // Create a blank image
+            $image = imagecreatetruecolor($width, $height);
+            // Allocate the color
+            $color = imagecolorallocate($image, $r, $g, $b);
+            // Fill the image with the color
+            imagefill($image, 0, 0, $color);
+            // Capture the output
+            ob_start();
+            imagepng($image);
+            $imageData = ob_get_clean();
+            // Destroy the image to free memory
+            imagedestroy($image);
+            // Encode the image data to base64
+            return 'data:image/png;base64,' . base64_encode($imageData);
+        }
+
         // This function takes an array with file names
         // as its first argument (e.g. retrieved via glob)
         // and returns new array with the data retrieved from
@@ -43,7 +62,7 @@
         // - to: the recipient name (either "greta" or "ruben")
         // and OPTIONALLY:
         // - comment: a string as a comment
-        // - still: path to a still image (relative to MEDIA_DIR)
+        // - poster: path to a still image (relative to MEDIA_DIR)
         //
         // ADDITIONALLY:
         // - the resulting array also includes a "timestamp"
@@ -78,12 +97,12 @@
             $res["date"] = $parsed["date"];
             // timestamp
             $res["timestamp"] = tsFromStr($parsed["date"]);
-            // still
-            if(isset($parsed["still"])) {
-                $res["still"] = $parsed["still"];
+            // poster
+            if(isset($parsed["poster"])) {
+                $res["poster"] = $parsed["poster"];
             }
             else {
-                $res["still"] = null;
+                $res["poster"] = null;
             }
 
             return $res;
@@ -117,38 +136,49 @@
             echo '<div class="letter">';
             echo "\n";
 
-            echo '<video class="lazy" style="width:100%;" controls data-poster="'.$data["still"].'">';
+            // random gray
+            $rndGray = rand(50,200);
+            echo '<video class="lazy" controls data-poster="'.generateBase64ColorImage($rndGray,$rndGray,$rndGray).'">';
+            //data-poster="'.($data["poster"] ? MEDIA_DIR . $data["poster"] : "").'">';
             echo "\n";
             echo '<data-src src="' . MEDIA_DIR . $data["file"] . '" type="video/mp4"></data-src>';
             echo "\n";
             echo "</video>\n";
-            echo '<p style="font-family: sans-serif; font-size: 10px;">' . $data["date"] . "</p>" . "";
+            echo '<p>' . $data["date"] . "</p>" . "";
+
+            //echo $data["comment"] ? nl2br($data["comment"]) : "";
             
             echo "</div>\n";
             
         }
 
         ?>
-
-
-        <main>
+        <div class="main">
             
-            <?php 
+            <header>
+                <h1>dear lover</h1>
+            </header>
+            
+            <main>
 
-            
-            ////////////////////////////////////////
-            ////////////////////////////////////////
-            
-            foreach($letters as $letter) {
-                // just print existing letters
-                if(file_exists(MEDIA_DIR . $letter["file"])){
-                    doLetter($letter);
+                <?php 
+
+                
+                ////////////////////////////////////////
+                ////////////////////////////////////////
+                
+                foreach($letters as $letter) {
+                    // just print existing letters
+                    if(file_exists(MEDIA_DIR . $letter["file"])){
+                        doLetter($letter);
+                    }
                 }
-            }
-            
-            ?>
-            
-        </main>
+                
+                ?>
+                
+            </main>
+
+        </div>
         
     </body>
 

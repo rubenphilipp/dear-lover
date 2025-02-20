@@ -1,0 +1,82 @@
+/* *****************************************************************************
+
+   Main CSS for dear lover.
+   created: 2025-02-20
+
+   $$ Last modified:  20:56:10 Thu Feb 20 2025 CET
+
+***************************************************************************** */
+
+/* VARIABLES */
+
+:root {
+    --background-color: rgb(255,255,255);
+    --text-color: rgb(0,0,0);
+    --default-font-family: "Helvetica Neue", Arial, sans-serif;
+    --default-font-size: 10pt;
+    --default-font-size-headings: 12pt;
+    --main-width: 600px;
+}
+
+/* ************************************************************************** */
+
+html {
+    font-family: var(--default-font-family);
+    font-size: var(--default-font-size);
+}
+
+body {
+    background-color: var(--background-color);
+}
+
+header {
+    min-height: 30px;
+}
+
+.main {
+    max-width: var(--main-width);
+    margin: 10px auto;
+    padding: 0 8px 0px 8px;
+}
+
+main {
+    color: var(--text-color);
+}
+
+h1, h2, h3, h4, h5, main, header, nav, p, a {
+    
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5 {
+    font-weight: 600;
+    font-size: var(--default-font-size-headings);
+}
+
+p, a {
+    font-size: var(--default-font-size);
+    color: var(--text-color);
+}
+
+p {
+    line-height: 1.2;
+}
+
+a {
+    text-decoration: underline;
+}
+
+/* ************************************************************************** */
+
+main .letter {
+    margin-bottom: 20px;
+}
+
+.letter video {
+    width: 100%;
+    object-fit: cover;
+}
+
+
+/* ************************************************************************** */
+/* EOF main.css */
