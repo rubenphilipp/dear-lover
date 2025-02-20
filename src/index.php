@@ -85,7 +85,6 @@
             $relativePath = $file;
 
             // get the path relative to the LETTERS_DIR
-            // Remove the known directory from the beginning of the path
             if (strpos($file, LETTERS_DIR) === 0) {
                 $relativePath = substr($file, strlen(LETTERS_DIR));
             }
