@@ -22,7 +22,7 @@
         <div class="main">
             
             <header>
-                <h1 style="text-align: right;"><a style="cursor: w-resize;" href="index.php">dear lover</a></h1>
+                <h1 style="text-align: right;"><a style="cursor: w-resize;" href="index">dear lover</a></h1>
             </header>
             
             <main>
