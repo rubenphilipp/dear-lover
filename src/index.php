@@ -146,7 +146,8 @@
             echo "<p style=\"text-align:right;\">\n";
             echo "an " . $data["to"] . "&emsp;\n";
             echo "von " . $data["from"] . "&emsp;\n";
-            echo $data["date"] . "\n";
+            $date = date_parse_from_format("Y-m-d H:i:s", $data["date"]);
+            echo $date["day"] . "." . $date["month"] . "." . $date["year"] . "\n";
             
             //echo '<p>an:' . $data["to"] . '_' . $data["date"] . '</p>';
 
@@ -177,6 +178,9 @@
                         doLetter($letter);
                     }
                 }
+
+                ////////////////////////////////////////
+                ////////////////////////////////////////
                 
                 ?>
                 
