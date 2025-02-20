@@ -3,8 +3,18 @@
 
     <head>
         <meta charset="utf-8">
-        <title></title>
-        <meta name="description" content="">
+        <title>dear lover</title>
+        <meta name="description" content="dear lover">
+        <meta name="author" content="Greta Gottschalk, Ruben Philipp">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="js/jquery-3.7.1.min.js"></script>
+        <script src="js/jquery.lazy/jquery.lazy.min.js"></script>
+        <script type="text/javascript" src="js/jquery.lazy/plugins/jquery.lazy.av.min.js"></script>
+        <script src="js/main.js"></script>
     </head>
 
     <body>
@@ -105,26 +115,41 @@
 
         function doLetter($data) {
             echo '<div class="letter">';
+            echo "\n";
 
-            echo '<video controls style="width:100%;" type="video/mp4" poster="'.$data["still"].'" src="' . MEDIA_DIR . $data["file"] . '">\n';
-            echo MEDIA_DIR . $data["file"];
-            echo "</video>";
+            echo '<video class="lazy" style="width:100%;" controls data-poster="'.$data["still"].'">';
+            echo "\n";
+            echo '<data-src src="' . MEDIA_DIR . $data["file"] . '" type="video/mp4"></data-src>';
+            echo "\n";
+            echo "</video>\n";
+            echo '<p style="font-family: sans-serif; font-size: 10px;">' . $data["date"] . "</p>" . "";
             
             echo "</div>\n";
             
         }
-        
-        foreach($letters as $letter) {
-            /* echo $letter["file"];
-             * echo "<br>";
-             * echo $letter["date"] . " " . $letter["timestamp"];
-             * echo "<br>"; */
 
-            doLetter($letter);
-        }
-        
         ?>
 
+
+        <main>
+            
+            <?php 
+
+            
+            ////////////////////////////////////////
+            ////////////////////////////////////////
+            
+            foreach($letters as $letter) {
+                // just print existing letters
+                if(file_exists(MEDIA_DIR . $letter["file"])){
+                    doLetter($letter);
+                }
+            }
+            
+            ?>
+            
+        </main>
+        
     </body>
 
 </html>
