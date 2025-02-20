@@ -60,12 +60,12 @@
         // the following mandatory fields:
         // - date: the date of the respective letter (formatted:
         //   YYYY-MM-DD HH-MM)
-        // - file: the video file (relative to MEDIA_DIR)
+        // - file: the video file (relative to the letter subdirectory)
         // - from: the sender name (either "greta" or "ruben")
         // - to: the recipient name (either "greta" or "ruben")
         // and OPTIONALLY:
         // - comment: a string as a comment
-        // - poster: path to a still image (relative to MEDIA_DIR)
+        // - poster: path to a still image (relative to the letter subdirectory)
         //
         // ADDITIONALLY:
         // - the resulting array also includes a "timestamp"
@@ -81,6 +81,16 @@
 
         function parseMetaFile($file) {
             $res = array();
+
+            $relativePath = $file;
+
+            // get the path relative to the LETTERS_DIR
+            // Remove the known directory from the beginning of the path
+            if (strpos($file, LETTERS_DIR) === 0) {
+                $relativePath = substr($file, strlen(LETTERS_DIR));
+            }
+
+            $dirname = dirname($relativePath) . "/";
             
             $contents = file_get_contents($file);
             $parsed = yaml_parse($contents);
@@ -88,7 +98,7 @@
             // date
             $res["date"] = $parsed["date"];
             // file
-            $res["file"] = $parsed["file"];
+            $res["file"] = $dirname . $parsed["file"];
             $res["from"] = $parsed["from"];
             $res["to"] = $parsed["to"];
             if(isset($parsed["comment"])) {
@@ -102,7 +112,7 @@
             $res["timestamp"] = tsFromStr($parsed["date"]);
             // poster
             if(isset($parsed["poster"])) {
-                $res["poster"] = $parsed["poster"];
+                $res["poster"] = $dirname . $parsed["poster"];
             }
             else {
                 $res["poster"] = null;
@@ -121,7 +131,7 @@
         ////////////////////////////////////////
 
         // list all meta-data files:
-        $files = glob(DATA_DIR . DATA_SUFFIX);
+        $files = glob(LETTERS_DIR . "*/" . DATA_FILE);
 
         $letters = parseMetaFiles($files);
 
@@ -136,14 +146,15 @@
         ////////////////////////////////////////
 
         function doLetter($data) {
+            
             echo '<div class="letter">';
             echo "\n";
 
             // random gray
             $rndGray = rand(50,200);
-            echo '<video class="lazy" controls data-poster="'.($data["poster"] ? MEDIA_DIR . $data["poster"] : generateBase64ColorImage($rndGray,$rndGray,$rndGray)).'">';
+            echo '<video class="lazy" controls data-poster="'.($data["poster"] ? LETTERS_DIR . $data["poster"] : generateBase64ColorImage($rndGray,$rndGray,$rndGray)).'">';
             echo "\n";
-            echo '<data-src src="' . MEDIA_DIR . $data["file"] . '" type="video/mp4"></data-src>';
+            echo '<data-src src="' . LETTERS_DIR . $data["file"] . '" type="video/mp4"></data-src>';
             echo "\n";
             echo "</video>\n";
             echo "<p style=\"text-align:right;\">\n";
@@ -162,7 +173,7 @@
 
         ?>
         <div class="main">
-            
+
             <header>
                 <h1><a style="cursor: e-resize;" href="manifesto">dear lover</a></h1>
             </header>
@@ -177,7 +188,7 @@
                 
                 foreach($letters as $letter) {
                     // just print existing letters
-                    if(file_exists(MEDIA_DIR . $letter["file"])){
+                    if(file_exists(LETTERS_DIR . $letter["file"])){
                         doLetter($letter);
                     }
                 }
