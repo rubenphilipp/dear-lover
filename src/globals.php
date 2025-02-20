@@ -10,7 +10,7 @@ const DATA_DIR = "letters/data/"; // needs to end with a "/"
 // the suffix for the meta-data files
 const DATA_SUFFIX = "*.yaml";
 // the HTTP-root
-const HTTP_ROOT = "/";
+const HTTP_ROOT = "https://dearlover.ddev.site/"; // needs to end with a "/"
 
 
 ?>
