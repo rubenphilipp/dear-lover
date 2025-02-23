@@ -3,7 +3,12 @@
 RewriteEngine On
 
 # It might be necessary to set the RewriteBase:
-RewriteBase / 
+RewriteBase /
+
+# Deny access to .yaml files in the "letters" directory and subdirectories
+RewriteCond %{REQUEST_URI} ^/letters/ [NC]
+RewriteCond %{REQUEST_URI} \.(yaml|txt)$ [NC]
+RewriteRule ^ - [F,L]
 
 RewriteCond %{REQUEST_FILENAME} !-d 
 RewriteCond %{REQUEST_FILENAME}.php -f 
