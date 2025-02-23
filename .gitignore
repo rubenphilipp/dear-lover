@@ -180,5 +180,10 @@ Temporary Items
 
 /src/letters/*/**
 
+################################################################################
+### dev files
+
+upload-site.sh
+
 
 # EOF .gitignore
