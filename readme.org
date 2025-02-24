@@ -7,14 +7,20 @@
 #+startup: overview
 
 #+begin_comment
-$$ Last modified:  23:27:31 Thu Feb 20 2025 CET
+$$ Last modified:  01:18:02 Mon Feb 24 2025 CET
 #+end_comment
 
-Ongoing project of Greta Gottschalk and Ruben Philipp.
+Ongoing project of Greta Gottschalk and Ruben Philipp.[fn:2]
+
+A manifesto can be found here:
+https://dearlover.gottschalk-philipp.com/manifesto
 
 * Description
 
 This directory contains the code for the website.
+
+NB: The /Hermes/ script facilitates sending new letters to this letterbox. Head
+over [[https://github.com/rubenphilipp/hermes][here]] for more information. 
 
 
 * Development
@@ -34,5 +40,6 @@ Note that you might want to change some constants in ~src/globals.php~
 (esp. ~HTTP_ROOT~). 
 
 * Footnotes
+[fn:2] See here: http://dearlover.gottschalk-philipp.com 
 
 [fn:1] This requires DDEV (https://ddev.com) to be installed.  
