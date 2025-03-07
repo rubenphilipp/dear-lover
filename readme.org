@@ -7,13 +7,19 @@
 #+startup: overview
 
 #+begin_comment
-$$ Last modified:  01:18:02 Mon Feb 24 2025 CET
+$$ Last modified:  22:05:39 Fri Mar  7 2025 CET
 #+end_comment
 
 Ongoing project of Greta Gottschalk and Ruben Philipp.[fn:2]
 
 A manifesto can be found here:
 https://dearlover.gottschalk-philipp.com/manifesto
+
+** Hermes
+
+There is a complementary "CMS" module for this repository, aimed at creating and
+uploading content (i.e. letters") to the site.  It lives here:
+https://github.com/rubenphilipp/hermes
 
 * Description
 
