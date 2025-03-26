@@ -13,7 +13,8 @@
 
         <script src="js/jquery-3.7.1.min.js"></script>
         <script src="js/jquery.lazy/jquery.lazy.min.js"></script>
-        <script type="text/javascript" src="js/jquery.lazy/plugins/jquery.lazy.av.min.js"></script>
+        <script type="text/javascript"
+                src="js/jquery.lazy/plugins/jquery.lazy.av.min.js"></script>
         <script src="js/main.js"></script>
     </head>
 
@@ -122,7 +123,12 @@
 
         function tsFromStr($s) {
             $dP = date_parse_from_format("Y-m-d H:i:s", $s);
-            $ts = mktime($dP["hour"], $dP["minute"], $dP["second"], $dP["month"], $dP["day"], $dP["year"]);
+            $ts = mktime($dP["hour"],
+                         $dP["minute"],
+                         $dP["second"],
+                         $dP["month"],
+                         $dP["day"],
+                         $dP["year"]);
             return $ts;
         }
         
@@ -151,16 +157,24 @@
 
             // random gray
             $rndGray = rand(50,200);
-            echo '<video class="lazy" controls data-poster="'.($data["poster"] ? LETTERS_DIR . $data["poster"] : generateBase64ColorImage($rndGray,$rndGray,$rndGray)).'">';
+            echo '<video class="lazy" controls data-poster="'
+                .($data["poster"]
+                    ? LETTERS_DIR . $data["poster"]
+                : generateBase64ColorImage($rndGray,$rndGray,$rndGray)).'">';
             echo "\n";
-            echo '<data-src src="' . LETTERS_DIR . $data["file"] . '" type="video/mp4"></data-src>';
+            echo '<data-src src="'
+               . LETTERS_DIR
+               . $data["file"]
+               . '" type="video/mp4"></data-src>';
             echo "\n";
             echo "</video>\n";
             echo "<p style=\"text-align:right;\">\n";
             echo "an " . $data["to"] . "&emsp;\n";
             echo "von " . $data["from"] . "&emsp;\n";
             $date = date_parse_from_format("Y-m-d H:i:s", $data["date"]);
-            echo $date["day"] . "." . $date["month"] . "." . $date["year"] . "\n";
+            echo $date["day"] . "."
+               . $date["month"] . "."
+               . $date["year"] . "\n";
             
             //echo '<p>an:' . $data["to"] . '_' . $data["date"] . '</p>';
 
@@ -174,7 +188,11 @@
         <div class="main">
 
             <header>
-                <h1><a style="cursor: e-resize;" href="manifesto">dear lover</a></h1>
+                <h1>
+                    <a style="cursor: e-resize;" href="manifesto">
+                        dear lover
+                    </a>
+                </h1>
             </header>
             
             <main>

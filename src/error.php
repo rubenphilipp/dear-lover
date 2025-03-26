@@ -14,7 +14,8 @@
 
         <script src="<?= HTTP_ROOT ?>js/jquery-3.7.1.min.js"></script>
         <script src="<?= HTTP_ROOT ?>js/jquery.lazy/jquery.lazy.min.js"></script>
-        <script type="text/javascript" src="<?= HTTP_ROOT ?>js/jquery.lazy/plugins/jquery.lazy.av.min.js"></script>
+        <script type="text/javascript"
+                src="<?= HTTP_ROOT ?>js/jquery.lazy/plugins/jquery.lazy.av.min.js"></script>
         <script src="<?= HTTP_ROOT ?>js/main.js"></script>
     </head>
 
@@ -23,14 +24,22 @@
         <div class="main">
             
             <header>
-                <h1 style="text-align: right;"><a style="cursor: w-resize;" href="<?= HTTP_ROOT ?>">dear lover</a></h1>
+                <h1 style="text-align: right;">
+                    <a style="cursor: w-resize;"
+                       href="<?= HTTP_ROOT ?>">
+                        dear lover
+                    </a>
+                </h1>
             </header>
             
             <main>
 
                 <h2><u>error</u></h2>
 
-                <p>this page does not exist. return to <a href="<?= HTTP_ROOT ?>">index</a>.</p>
+                <p>
+                    this page does not exist.
+                    return to <a href="<?= HTTP_ROOT ?>">index</a>.
+                </p>
 
             </main>
 
