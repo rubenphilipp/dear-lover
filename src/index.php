@@ -107,6 +107,13 @@
             else {
                 $res["comment"] = null;
             }
+            if(isset($parsed["location"])) {
+                // also lowercase date
+                $res["location"] = strtolower($parsed["location"]);
+            }
+            else {
+                $res["location"] = null;
+            }
             $res["date"] = $parsed["date"];
             // timestamp
             $res["timestamp"] = tsFromStr($parsed["date"]);
@@ -171,11 +178,15 @@
             echo "<p style=\"text-align:right;\">\n";
             echo "an " . $data["to"] . "&emsp;\n";
             echo "von " . $data["from"] . "&emsp;\n";
+
+            if ($data["location"]) echo $data["location"].",&nbsp;";
+            
             $date = date_parse_from_format("Y-m-d H:i:s", $data["date"]);
+            
             echo $date["day"] . "."
                . $date["month"] . "."
                . $date["year"] . "\n";
-            
+
             //echo '<p>an:' . $data["to"] . '_' . $data["date"] . '</p>';
 
             //echo $data["comment"] ? nl2br($data["comment"]) : "";
