@@ -32,7 +32,7 @@
                 <h3>Legal Notice according to § 5 TMG:</h3>
 
                 <p>
-                    Greta Gottschalk and Ruben Philipp<br>
+                    Greta Philipp Gottschalk and Ruben Philipp Gottschalk<br>
                     Isenbergstraße 12<br>
                     45130 Essen
                 </p>
