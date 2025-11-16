@@ -3,7 +3,7 @@
    Main CSS for dear lover.
    created: 2025-02-20
 
-   $$ Last modified:  00:48:29 Thu May 22 2025 CEST
+   $$ Last modified:  01:35:10 Sun Nov 16 2025 CET
 
 ***************************************************************************** */
 
@@ -91,14 +91,46 @@ main .letter {
 
 .letter video {
     width: 100%;
-    object-fit: cover;
+    object-fit: contain; /* ÄNDERN SIE DIES */
 }
 
+/* .letter video { */
+/*     width: 100%; */
+/*     object-fit: cover; */
+/* } */
 
-main.manifesto > p {
-    margin-top: 48px;
-    line-height: 1.66;
-}
+
+/* /\* Handle extreme aspect ratio videos *\/ */
+/* .video-js video { */
+/*     object-fit: contain; */
+/* } */
+
+/* /\* Ensure video containers don't break layout *\/ */
+/* .letter .video-js { */
+/*     max-width: 100%; */
+/* } */
+
+/* /\* Force video-js to respect unusual aspect ratios *\/ */
+/* .video-js .vjs-tech { */
+/*     object-fit: fill; */
+/*     width: 100%; */
+/*     height: 100%; */
+/* } */
+
+/* main.manifesto > p { */
+/*     margin-top: 48px; */
+/*     line-height: 1.66; */
+/* } */
+
+/* .video-js .vjs-tech { */
+/*     object-fit: fill !important; */
+/*     width: 100% !important; */
+/*     height: 100% !important; */
+/* } */
+
+/* .video-js { */
+/*     position: relative !important; */
+/* } */
 
 /* ************************************************************************** */
 /* EOF main.css */

@@ -10,12 +10,13 @@
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="vendor/video-js-8/video-js.css" />
 
-        <script src="js/jquery-3.7.1.min.js"></script>
-        <script src="js/jquery.lazy/jquery.lazy.min.js"></script>
-        <script type="text/javascript"
-                src="js/jquery.lazy/plugins/jquery.lazy.av.min.js"></script>
-        <script src="js/main.js"></script>
+        <!-- <script src="js/jquery-3.7.1.min.js"></script>
+             <script src="js/jquery.lazy/jquery.lazy.min.js"></script>
+             <script type="text/javascript"
+             src="js/jquery.lazy/plugins/jquery.lazy.av.min.js"></script>
+             <script src="js/main.js"></script> -->
     </head>
 
     <body>
@@ -125,6 +126,14 @@
                 $res["poster"] = null;
             }
 
+            if(isset($parsed["width"]) && isset($parsed["height"])) {
+                $res["width"] = $parsed["width"];
+                $res["height"] = $parsed["height"];
+            } else {
+                $res["width"] = null;
+                $res["height"] = null;
+            }
+
             return $res;
         }
 
@@ -164,17 +173,79 @@
 
             // random gray
             $rndGray = rand(50,200);
-            echo '<video class="lazy" controls data-poster="'
-                .($data["poster"]
-                    ? LETTERS_DIR . $data["poster"]
-                : generateBase64ColorImage($rndGray,$rndGray,$rndGray)).'">';
-            echo "\n";
-            echo '<data-src src="'
-               . LETTERS_DIR
-               . $data["file"]
-               . '" type="video/mp4"></data-src>';
-            echo "\n";
-            echo "</video>\n";
+
+            // Poster-Pfad bestimmen
+            $posterPath = ($data["poster"]
+                ? LETTERS_DIR . $data["poster"]
+                         : generateBase64ColorImage($rndGray,$rndGray,$rndGray));
+
+            // Datei-Pfad und Typ bestimmen
+            $filePath = LETTERS_DIR . $data["file"];
+            $extension = pathinfo($data["file"], PATHINFO_EXTENSION);
+
+            $type = '';
+            if ($extension === 'm3u8') {
+                $type = 'application/x-mpegURL';
+            } elseif ($extension === 'mp4') {
+                $type = 'video/mp4';
+            } elseif ($extension === 'mov') {
+                $type = 'video/quicktime';
+            }
+
+            // --- NEUE VEREINFACHTE LOGIK ---
+            $aspectRatio = null;
+            $classString = "video-js vjs-default-skin"; // Basis-Klassen
+
+            // Prüfen, ob wir gültige Abmessungen aus der YAML haben
+            if (!empty($data["width"]) && !empty($data["height"]) && $data["height"] > 0) {
+                // FALL 1: NEUES VIDEO (mit Maßen)
+                // Wir berechnen das exakte Verhältnis
+                $aspectRatio = $data["width"] . ":" . $data["height"];
+                $dataSetup = '{ "fluid": true, "aspectRatio": "'.$aspectRatio.'" }';
+                $classString .= " vjs-fluid"; // Immer fluid, Video.js regelt das
+
+            } else {
+                // FALL 2: ALTES VIDEO (ohne Maße)
+                // Wir verwenden 16:9 als stabilen Fallback-Container.
+                $dataSetup = '{ "fluid": true }';
+                $classString .= " vjs-16-9"; // 16:9-Klasse als Fallback
+            }
+            // --- ENDE NEUE LOGIK ---
+
+            // --- Angepasster video-js Block ---
+            // Dieser Block verwendet jetzt die oben definierten $classString und $dataSetup
+            echo '<video-js
+                        id="video-'.basename($data["file"]).'"
+                        class="'.$classString.'"
+                        controls
+                        preload="auto"
+                        poster="'.$posterPath.'"
+                        data-setup=\''.$dataSetup.'\'>
+                    <source src="'.$filePath.'" '.($type ? 'type="'.$type.'"' : '').'>
+                    <p class="vjs-no-js">
+                        To view this video please enable JavaScript.
+                    </p>
+                </video-js>';
+
+            ////////////////////////////////////////
+
+            // alte Implementierung via <video> (2025-11-16):
+            
+            /* echo '<video class="lazy" controls data-poster="'
+             *     .($data["poster"]
+             *         ? LETTERS_DIR . $data["poster"]
+             *     : generateBase64ColorImage($rndGray,$rndGray,$rndGray)).'">';
+             * echo "\n";
+             * echo '<data-src src="'
+             *    . LETTERS_DIR
+             *    . $data["file"]
+             *    . '" type="video/mp4"></data-src>'; */
+
+            /* echo "\n";
+             * echo "</video>\n"; */
+
+            ////////////////////////////////////////
+
             echo "<p style=\"text-align:right;\">\n";
             echo "an " . $data["to"] . "&emsp;\n";
             echo "von " . $data["from"] . "&emsp;\n";
@@ -233,6 +304,8 @@
             </footer>
 
         </div>
+
+        <script src="vendor/video-js-8/video.min.js"></script>
         
     </body>
 
