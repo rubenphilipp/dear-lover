@@ -10,9 +10,15 @@
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" href="vendor/video-js-8/video-js.css" />
 
+        <link rel="stylesheet" href="vendor/video-js-8/video-js.css" />
         <script src="vendor/video-js-8/video.min.js"></script>
+        
+        <link rel="stylesheet" href="vendor/video-js-8/videojs-hls-quality-selector.css" />
+        
+        <script src="vendor/video-js-8/videojs-contrib-quality-levels.min.js"></script>
+        
+        <script src="vendor/video-js-8/videojs-hls-quality-selector.min.js"></script>
 
         <!-- <script src="js/jquery-3.7.1.min.js"></script>
              <script src="js/jquery.lazy/jquery.lazy.min.js"></script>
@@ -204,13 +210,13 @@
                 // FALL 1: NEUES VIDEO (mit Maßen)
                 // Wir berechnen das exakte Verhältnis
                 $aspectRatio = $data["width"] . ":" . $data["height"];
-                $dataSetup = '{ "fluid": true, "aspectRatio": "'.$aspectRatio.'", "objectFit": "contain" }';
+                $dataSetup = '{ "fluid": true, "controls": true, "aspectRatio": "'.$aspectRatio.'", "objectFit": "contain", "plugins": { "hlsQualitySelector": { "displayCurrentQuality": true } }, "html5": { "vhs": { "overrideNative": true } } }';
                 $classString .= " vjs-fluid"; // Fluid-Klasse
                 
             } else {
                 // FALL 2: ALTES VIDEO (ohne Maße)
                 // Wir verwenden 16:9 als stabilen Fallback-Container.
-                $dataSetup = '{ "fluid": true, "objectFit": "contain" }';
+                $dataSetup = '{ "fluid": true, "controls": true, "objectFit": "contain", "plugins": { "hlsQualitySelector": { "displayCurrentQuality": true } }, "html5": { "vhs": { "overrideNative": true } } }';
                 $classString .= " vjs-16-9"; // 16:9-Klasse als Fallback
             }
             // --- ENDE NEUE LOGIK ---
@@ -237,7 +243,7 @@
             // 3. Fügen Sie ein Skript hinzu, um genau diesen Player
             //    mit den korrekten Optionen manuell zu initialisieren
             echo '<script>
-                    videojs("#'.$playerID.'", '.$dataSetup.');
+                    videojs("'.$playerID.'", '.$dataSetup.');
                   </script>';
             
 
