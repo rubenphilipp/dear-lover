@@ -210,13 +210,13 @@
                 // FALL 1: NEUES VIDEO (mit Maßen)
                 // Wir berechnen das exakte Verhältnis
                 $aspectRatio = $data["width"] . ":" . $data["height"];
-                $dataSetup = '{ "fluid": true, "controls": true, "aspectRatio": "'.$aspectRatio.'", "objectFit": "contain", "plugins": { "hlsQualitySelector": { "displayCurrentQuality": true } }, "html5": { "vhs": { "overrideNative": true } } }';
-                $classString .= " vjs-fluid"; // Fluid-Klasse
+                $dataSetup = '{ "controls": true, "aspectRatio": "'.$aspectRatio.'", "objectFit": "contain", "plugins": { "hlsQualitySelector": { "displayCurrentQuality": true } } }';
+                // $classString .= " vjs-fluid"; // Fluid-Klasse
                 
             } else {
                 // FALL 2: ALTES VIDEO (ohne Maße)
                 // Wir verwenden 16:9 als stabilen Fallback-Container.
-                $dataSetup = '{ "fluid": true, "controls": true, "objectFit": "contain", "plugins": { "hlsQualitySelector": { "displayCurrentQuality": true } }, "html5": { "vhs": { "overrideNative": true } } }';
+                $dataSetup = '{ "controls": true, "objectFit": "contain", "plugins": { "hlsQualitySelector": { "displayCurrentQuality": true } } }';
                 $classString .= " vjs-16-9"; // 16:9-Klasse als Fallback
             }
             // --- ENDE NEUE LOGIK ---
