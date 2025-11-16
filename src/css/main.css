@@ -3,7 +3,7 @@
    Main CSS for dear lover.
    created: 2025-02-20
 
-   $$ Last modified:  01:35:10 Sun Nov 16 2025 CET
+   $$ Last modified:  01:49:15 Sun Nov 16 2025 CET
 
 ***************************************************************************** */
 
@@ -91,7 +91,7 @@ main .letter {
 
 .letter video {
     width: 100%;
-    object-fit: contain; /* ÄNDERN SIE DIES */
+    object-fit: contain; 
 }
 
 /* .letter video { */
