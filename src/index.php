@@ -5,12 +5,14 @@
         <meta charset="utf-8">
         <title>dear lover</title>
         <meta name="description" content="dear lover">
-        <meta name="author" content="Greta Gottschalk, Ruben Philipp">
+        <meta name="author" content="Greta Philipp Gottschalk, Ruben Philipp Gottschalk">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="vendor/video-js-8/video-js.css" />
+
+        <script src="vendor/video-js-8/video.min.js"></script>
 
         <!-- <script src="js/jquery-3.7.1.min.js"></script>
              <script src="js/jquery.lazy/jquery.lazy.min.js"></script>
@@ -178,11 +180,11 @@
             $posterPath = ($data["poster"]
                 ? LETTERS_DIR . $data["poster"]
                          : generateBase64ColorImage($rndGray,$rndGray,$rndGray));
-
+            
             // Datei-Pfad und Typ bestimmen
             $filePath = LETTERS_DIR . $data["file"];
             $extension = pathinfo($data["file"], PATHINFO_EXTENSION);
-
+            
             $type = '';
             if ($extension === 'm3u8') {
                 $type = 'application/x-mpegURL';
@@ -191,41 +193,53 @@
             } elseif ($extension === 'mov') {
                 $type = 'video/quicktime';
             }
-
-            // --- NEUE VEREINFACHTE LOGIK ---
+            
+            // --- NEUE KORRIGIERTE LOGIK (Verwendet aspectRatio) ---
+            
             $aspectRatio = null;
             $classString = "video-js vjs-default-skin"; // Basis-Klassen
-
+            
             // Prüfen, ob wir gültige Abmessungen aus der YAML haben
             if (!empty($data["width"]) && !empty($data["height"]) && $data["height"] > 0) {
                 // FALL 1: NEUES VIDEO (mit Maßen)
                 // Wir berechnen das exakte Verhältnis
                 $aspectRatio = $data["width"] . ":" . $data["height"];
-                $dataSetup = '{ "fluid": true, "aspectRatio": "'.$aspectRatio.'" }';
-                $classString .= " vjs-fluid"; // Immer fluid, Video.js regelt das
-
+                $dataSetup = '{ "fluid": true, "aspectRatio": "'.$aspectRatio.'", "objectFit": "contain" }';
+                $classString .= " vjs-fluid"; // Fluid-Klasse
+                
             } else {
                 // FALL 2: ALTES VIDEO (ohne Maße)
                 // Wir verwenden 16:9 als stabilen Fallback-Container.
-                $dataSetup = '{ "fluid": true }';
+                $dataSetup = '{ "fluid": true, "objectFit": "contain" }';
                 $classString .= " vjs-16-9"; // 16:9-Klasse als Fallback
             }
             // --- ENDE NEUE LOGIK ---
 
-            // --- Angepasster video-js Block ---
-            // Dieser Block verwendet jetzt die oben definierten $classString und $dataSetup
+
+            // --- Angepasster video-js Block (mit manueller Initialisierung) ---
+            
+            // 1. Erstellen Sie eine eindeutige ID für den Player
+            $playerID = 'video_'.md5($filePath);
+
+            // 2. Geben Sie den Player-Tag OHNE data-setup aus
             echo '<video-js
-                        id="video-'.basename($data["file"]).'"
+                        id="'.$playerID.'"
                         class="'.$classString.'"
                         controls
-                        preload="auto"
-                        poster="'.$posterPath.'"
-                        data-setup=\''.$dataSetup.'\'>
+                        preload="metadata"
+                        poster="'.$posterPath.'">
                     <source src="'.$filePath.'" '.($type ? 'type="'.$type.'"' : '').'>
                     <p class="vjs-no-js">
                         To view this video please enable JavaScript.
                     </p>
                 </video-js>';
+            
+            // 3. Fügen Sie ein Skript hinzu, um genau diesen Player
+            //    mit den korrekten Optionen manuell zu initialisieren
+            echo '<script>
+                    videojs("#'.$playerID.'", '.$dataSetup.');
+                  </script>';
+            
 
             ////////////////////////////////////////
 
@@ -305,7 +319,6 @@
 
         </div>
 
-        <script src="vendor/video-js-8/video.min.js"></script>
         
     </body>
 
