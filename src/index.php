@@ -247,7 +247,7 @@
                         id="'.$playerID.'"
                         class="'.$classString.'"
                         controls
-                        preload="metadata"
+                        preload="none"
                         poster="'.$posterPath.'">
                     <p class="vjs-no-js">
                         To view this video please enable JavaScript.
