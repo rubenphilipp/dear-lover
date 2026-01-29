@@ -228,13 +228,27 @@
             $playerID = 'video_'.md5($filePath);
 
             // 2. Geben Sie den Player-Tag OHNE data-setup aus
+
+            // old
+            // RP  Thu Jan 29 01:12:04 2026
+            /* echo '<video-js
+             *             id="'.$playerID.'"
+             *             class="'.$classString.'"
+             *             controls
+             *             preload="metadata"
+             *             poster="'.$posterPath.'">
+             *         <source src="'.$filePath.'" '.($type ? 'type="'.$type.'"' : '').'>
+             *         <p class="vjs-no-js">
+             *             To view this video please enable JavaScript.
+             *         </p>
+             *     </video-js>'; */
+
             echo '<video-js
                         id="'.$playerID.'"
                         class="'.$classString.'"
                         controls
                         preload="metadata"
                         poster="'.$posterPath.'">
-                    <source src="'.$filePath.'" '.($type ? 'type="'.$type.'"' : '').'>
                     <p class="vjs-no-js">
                         To view this video please enable JavaScript.
                     </p>
@@ -245,6 +259,24 @@
             echo '<script>
                     videojs("'.$playerID.'", '.$dataSetup.');
                   </script>';
+
+            echo '<script>
+        (function() {
+          // Initialize the player instance
+          var player = videojs("'.$playerID.'", '.$dataSetup.');
+          
+          // Manually set the source to bypass Firefox native check
+          player.src({
+            src: "'.$filePath.'",
+            type: "'.$type.'"
+          });
+
+          // Only enable the quality selector for HLS streams
+          if ("'.$extension.'" === "m3u8") {
+            player.hlsQualitySelector({ displayCurrentQuality: true });
+          }
+        })();
+      </script>';
             
 
             ////////////////////////////////////////

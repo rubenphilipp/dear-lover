@@ -22,3 +22,19 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule .* error.php [L] 
 
 </IfModule> 
+
+<IfModule mod_headers.c>
+    # 1. Standard CORS headers
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, OPTIONS"
+    Header set Access-Control-Allow-Headers "Range, Content-Type"
+    
+    # 2. Corrected Expose header (removed the typo and the wildcard)
+    Header set Access-Control-Expose-Headers "Content-Length,Content-Range"
+</IfModule>
+
+# 3. Add MIME types for Firefox (Crucial for HLS)
+<IfModule mod_mime.c>
+    AddType application/x-mpegURL .m3u8
+    AddType video/MP2T .ts
+</IfModule>
