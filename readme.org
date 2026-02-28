@@ -10,6 +10,17 @@
 $$ Last modified:  22:05:39 Fri Mar  7 2025 CET
 #+end_comment
 
+* This Repository Has Moved!
+
+This repository has been moved to Codeberg in February 2026. 
+
+You'll find it here: https://codeberg.org/rubenphilipp/dear-lover
+
+-----
+
+* Description
+
+
 Ongoing project of Greta Gottschalk and Ruben Philipp.[fn:2]
 
 A manifesto can be found here:
